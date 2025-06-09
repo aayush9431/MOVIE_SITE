@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PichkuMovies Admin Dashboard</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        // Immediate access check
+        try {
+            if (!sessionStorage.getItem('adminLoggedIn') || 
+                sessionStorage.getItem('adminRole') !== 'admin' || 
+                !sessionStorage.getItem('adminId')) {
+                console.log('Access denied - Not logged in as admin');
+                sessionStorage.clear();
+                window.location.href = 'login.html';
+                throw new Error('Access denied');
+            }
+        } catch (error) {
+            console.error('Access check failed:', error);
+            sessionStorage.clear();
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="admin-dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-film"></i>
+                <h2>PichkuMovies</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-page="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#" class="nav-link" data-page="users">
+                    <i class="fas fa-users"></i> Users
+                </a>
+                <a href="#" class="nav-link" data-page="movies">
+                    <i class="fas fa-video"></i> Movies
+                </a>
+                <a href="#" class="nav-link" data-page="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="#" id="logoutButton" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="adminUsername">Admin</span>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <h1 class="dashboard-title">Dashboard</h1>
+                
+                <!-- Stats Cards -->
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <i class="fas fa-film"></i>
+                        <div class="stat-info">
+                            <h3>Total Movies</h3>
+                            <p id="totalMovies">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-list"></i>
+                        <div class="stat-info">
+                            <h3>Categories</h3>
+                            <p id="totalCategories">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3>Total Users</h3>
+                            <p id="totalUsers">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>User Management</h2>
+                        <button id="addUserBtn" class="action-button">
+                            <i class="fas fa-plus"></i> Add User
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Last Login</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- User rows will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New User</h2>
+                <button class="close-button">&times;</button>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label for="newUsername">Username</label>
+                    <input type="text" id="newUsername" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="newEmail">Email</label>
+                    <input type="email" id="newEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Password</label>
+                    <input type="password" id="newPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="newRole">Role</label>
+                    <select id="newRole" name="role" required>
+                        <option value="user">User</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newStatus">Status</label>
+                    <select id="newStatus" name="status" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelAddUser" class="button secondary">Cancel</button>
+                    <button type="submit" class="button primary">Add User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Load services in correct order -->
+    <script src="services/data-service.js"></script>
+    <script src="services/access-control.js"></script>
+    <script>
+        // Secondary access verification
+        if (!accessControl.enforceAdminAccess()) {
+            throw new Error('Access verification failed');
+        }
+    </script>
+    <script src="admin-dashboard.js"></script>
+</body>
+</html> 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PichkuMovies - Best Movies</title>
+    <link rel="stylesheet" href="Horror_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-film"></i>
+            <a href="index.html">PichkuMovies</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="Top_Movies.html">Top Movies</a>
+            <a href="Best_Movies.html" class="active">Best Movies</a>
+        </div>
+        <div class="nav-search">
+            <input type="text" id="searchInput" placeholder="Search movies...">
+            <button id="searchButton"><i class="fas fa-search"></i></button>
+        </div>
+    </nav>
+
+    <!-- Category Header -->
+    <header class="category-header">
+        <h1>Best Movies</h1>
+        <p>Experience the finest cinematic masterpieces of all time</p>
+    </header>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading movies...</p>
+    </div>
+
+    <!-- Movie Grid -->
+    <div class="wrapper">
+        <!-- Movies will be loaded here by the API -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About PichkuMovies</h3>
+                <p>Your ultimate destination for movies across all genres. Stream your favorite titles anytime, anywhere.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                    <li><a href="#">My List</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Designed & Developed by Aayush Raj</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="navbar.js"></script>
+    <script src="search.js"></script>
+    <script src="best-movies-api.js"></script>
+</body>
+</html> 

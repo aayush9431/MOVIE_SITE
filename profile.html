@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - PichkuMovies</title>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">
+                    <i class="fas fa-film"></i>
+                    <span>PichkuMovies</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="nav-item profile-dropdown">
+                    <button class="profile-btn">
+                        <i class="fas fa-user-circle"></i> <span id="profileUsername">User</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-sidebar">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle"></i>
+                <h2 id="sidebarUsername">Username</h2>
+            </div>
+            <nav class="profile-nav">
+                <a href="#" class="active" data-section="profile">
+                    <i class="fas fa-user"></i> Profile Information
+                </a>
+                <a href="#" data-section="favorites">
+                    <i class="fas fa-heart"></i> Favorite Movies
+                </a>
+                <a href="#" data-section="watchlist">
+                    <i class="fas fa-clock"></i> Watchlist
+                </a>
+                <a href="#" data-section="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="#" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <div class="profile-content">
+            <!-- Profile Information Section -->
+            <section id="profileSection" class="content-section active">
+                <h2>Profile Information</h2>
+                <form id="profileForm" class="profile-form">
+                    <div class="form-group">
+                        <label for="editUsername">Username</label>
+                        <input type="text" id="editUsername" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email</label>
+                        <input type="email" id="editEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" name="currentPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" name="newPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" name="confirmNewPassword">
+                    </div>
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <!-- Favorites Section -->
+            <section id="favoritesSection" class="content-section">
+                <h2>Favorite Movies</h2>
+                <div id="favoriteMovies" class="movie-grid"></div>
+            </section>
+
+            <!-- Watchlist Section -->
+            <section id="watchlistSection" class="content-section">
+                <h2>My Watchlist</h2>
+                <div id="watchlistMovies" class="movie-grid"></div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settingsSection" class="content-section">
+                <h2>Account Settings</h2>
+                <form id="settingsForm" class="settings-form">
+                    <div class="form-group">
+                        <label>Email Notifications</label>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="newMovies">
+                                New Movies
+                            </label>
+                            <label class="toggle">
+                                <input type="checkbox" id="recommendations">
+                                Recommendations
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Privacy</label>
+                        <div class="toggle-group">
+                            <label class="toggle">
+                                <input type="checkbox" id="publicProfile">
+                                Public Profile
+                            </label>
+                            <label class="toggle">
+                                <input type="checkbox" id="showWatchlist">
+                                Show Watchlist
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit">Save Settings</button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html> 

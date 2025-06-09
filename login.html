@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PichkuMovies Admin - Login</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .debug-panel {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            font-family: monospace;
+            display: none;
+        }
+        .debug-panel.active {
+            display: block;
+        }
+        #debugOutput {
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        // Clear any existing session
+        sessionStorage.clear();
+    </script>
+</head>
+<body>
+    <div class="admin-login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <i class="fas fa-film"></i>
+                <h1>PichkuMovies Admin</h1>
+            </div>
+            <form id="adminLoginForm" class="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Debug Panel -->
+    <div class="debug-panel" id="debugPanel">
+        <button onclick="toggleDebug()" style="float: right;">Close</button>
+        <h3>Debug Info</h3>
+        <div id="debugOutput"></div>
+    </div>
+
+    <!-- Debug console -->
+    <script>
+        console.log('=== Admin Panel Debug ===');
+        console.log('Page loaded at:', new Date().toISOString());
+        
+        // Function to check localStorage
+        function checkStorage() {
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                console.log('✓ localStorage is working');
+                return true;
+            } catch (e) {
+                console.error('✗ localStorage error:', e);
+                return false;
+            }
+        }
+
+        // Function to check if DataService is loaded
+        function checkDataService() {
+            if (typeof dataService !== 'undefined') {
+                console.log('✓ DataService is loaded');
+                return true;
+            } else {
+                console.error('✗ DataService is not loaded');
+                return false;
+            }
+        }
+
+        // Debug functions
+        function showDebugInfo() {
+            const debugPanel = document.getElementById('debugPanel');
+            const debugOutput = document.getElementById('debugOutput');
+            let output = '';
+
+            // Check localStorage
+            output += '=== Storage Check ===\n';
+            const storageWorking = checkStorage();
+            output += `localStorage: ${storageWorking ? '✓' : '✗'}\n\n`;
+
+            // Check DataService
+            output += '=== DataService Check ===\n';
+            const serviceLoaded = checkDataService();
+            output += `DataService: ${serviceLoaded ? '✓' : '✗'}\n\n`;
+
+            // Show current users
+            output += '=== Current Users ===\n';
+            try {
+                const users = dataService.getAllUsers();
+                output += JSON.stringify(users, null, 2);
+            } catch (e) {
+                output += 'Error getting users: ' + e.message;
+            }
+
+            debugOutput.textContent = output;
+            debugPanel.classList.add('active');
+        }
+
+        function toggleDebug() {
+            const debugPanel = document.getElementById('debugPanel');
+            debugPanel.classList.toggle('active');
+        }
+
+        // Add debug keyboard shortcut (Ctrl + Shift + D)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                showDebugInfo();
+            }
+        });
+
+        // Monitor script loading
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'SCRIPT') {
+                console.error('Script loading failed:', e.target.src);
+                document.getElementById('errorMessage').textContent = 'Failed to load required scripts. Please try refreshing the page.';
+            }
+        }, true);
+    </script>
+
+    <!-- Load services in correct order -->
+    <script src="services/data-service.js"></script>
+    <script src="services/access-control.js"></script>
+    <script>
+        // Verify DataService loaded correctly
+        setTimeout(() => {
+            if (checkStorage() && checkDataService()) {
+                console.log('✓ All systems ready');
+                // Check current users in storage
+                try {
+                    const users = dataService.getAllUsers();
+                    console.log('Current users:', users);
+                } catch (e) {
+                    console.error('Error checking users:', e);
+                }
+            } else {
+                console.error('✗ System initialization failed');
+                document.getElementById('errorMessage').textContent = 'System initialization failed. Please refresh the page.';
+            }
+        }, 100);
+    </script>
+    <script src="admin-login.js"></script>
+</body>
+</html> 

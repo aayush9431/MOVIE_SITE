@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PichkuMovies - Your Ultimate Movie Guide</title>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="advanced-search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="movies-api.js"></script>
+    <script src="search.js"></script>
+    <script src="advanced-search.js"></script>
+    <script src="navbar.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <a href="index.html" class="navbar-logo">
+                    <i class="fas fa-film"></i>
+                    PichkuMovies
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link active">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+                <div class="nav-item genre-dropdown">
+                    <button class="genre-btn">
+                        <i class="fas fa-film"></i>
+                        Genre
+                        <div class="dropdown-arrow"></div>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="Horror.html"><i class="fas fa-ghost"></i> Horror</a>
+                        <a href="Thriller.html"><i class="fas fa-mask"></i> Thriller</a>
+                        <a href="Action.html"><i class="fas fa-fire"></i> Action</a>
+                        <a href="Comedy.html"><i class="fas fa-laugh"></i> Comedy</a>
+                        <a href="Romance.html"><i class="fas fa-heart"></i> Romance</a>
+                        <a href="Drama.html"><i class="fas fa-theater-masks"></i> Drama</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="Top_Movies.html" class="nav-link">
+                        <i class="fas fa-star"></i> Top Movies
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="Best_Movies.html" class="nav-link">
+                        <i class="fas fa-trophy"></i> Best Movies
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="admin/login.html" class="nav-link">
+                        <i class="fas fa-lock"></i> Admin
+                    </a>
+                </div>
+                <div class="nav-item profile-dropdown">
+                    <button class="profile-btn">
+                        <i class="fas fa-user-circle"></i> Profile <i class="dropdown-arrow"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a href="signup.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Welcome to PichkuMovies</h1>
+        <p>Discover the best movies across different genres</p>
+    </header>
+
+    <div class="search-section">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for movies...">
+            <button type="button" id="searchButton" class="search-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
+        </div>
+        <div id="filterContainer"></div>
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+    </div>
+    <div class="wrapper" id="movieResults"></div>
+
+    <main>
+        <section class="genre-section">
+            <h2>Browse by Genre</h2>
+            <div class="container">
+                <div class="card">
+                    <div class="face face1">
+                        <div class="content">           
+                            <h3><big>Top Movies</big></h3>
+                        </div>
+                    </div>
+                    <div class="face face2">
+                        <div class="content">
+                            <p>Discover the most popular and highest-rated movies of all time.</p>
+                            <a href="Top_Movies.html">
+                                <button>View Now</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="face face1">
+                        <div class="content">              
+                            <h3><big>Best Movies</big></h3>
+                        </div>
+                    </div>
+                    <div class="face face2">
+                        <div class="content">
+                            <p>Experience the finest cinematic masterpieces of all time.</p>
+                            <a href="Best_Movies.html">
+                                <button>View Now</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About PichkuMovies</h3>
+                <p>Your ultimate destination for movie information and entertainment.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Top_Movies.html">Top Movies</a></li>
+                    <li><a href="Best_Movies.html">Best Movies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Designed & Developed by Aayush Raj.</p>
+        </div>
+    </footer>
+</body>
+</html>
