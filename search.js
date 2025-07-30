@@ -1,3 +1,4 @@
+(function() {
 // API Configuration
 const BASE_URL = 'http://www.omdbapi.com';
 const API_KEY = 'ed6377a9';
@@ -212,3 +213,4 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 });
+})();

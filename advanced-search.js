@@ -1,3 +1,4 @@
+(function() {
 // Add these constants at the top of the file
 const BASE_URL = 'http://www.omdbapi.com';
 const API_KEY = 'ed6377a9'; // API key updated
@@ -210,4 +211,5 @@ function createMovieCard(movie) {
             </div>
         </div>
     `;
-} 
+}
+})(); 
