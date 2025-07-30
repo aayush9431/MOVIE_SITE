@@ -287,8 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Add CSS for streaming services section
-const style = document.createElement('style');
-style.textContent = `
+const streamingStyle = document.createElement('style');
+streamingStyle.textContent = `
     .streaming-services {
         margin-top: 15px;
         padding-top: 15px;
@@ -336,4 +336,4 @@ style.textContent = `
         font-style: italic;
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(streamingStyle); 
